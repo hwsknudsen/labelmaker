@@ -86,35 +86,38 @@ namespace WindowsFormsApp1
 
         private void printimage()
         {
-            PrintDocument pd = new PrintDocument();
+            if (textBox1.Text.Length >= 3)
+            {
+                PrintDocument pd = new PrintDocument();
 
-            //pd.PrinterSettings.PrinterName = "CutePDF Writer";
-            string printer = @"\\viking-print16\Front";
-            pd.PrinterSettings.PrinterName = printer;
-                               
-            pd.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
-            pd.DefaultPageSettings.Landscape = true;
-            pd.DefaultPageSettings.Margins = new Margins (1, 1, 1, 1);
-            
-            pd.Print();
+                //pd.PrinterSettings.PrinterName = "CutePDF Writer";
+                string printer = @"\\viking-print16\Front";
+                pd.PrinterSettings.PrinterName = printer;
 
-            /*
-            MailMessage mail = new MailMessage();
-            SmtpClient client = new SmtpClient();
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = "viking-bm.mail.protection.outlook.com";
-            mail.To.Add(new MailAddress("admin@viking.bm"));
-            mail.From = new MailAddress("lablelogger@viking.bm");
-            mail.Subject = "New Lablel";
-            string emailbody = "Label Printed For: " + textBox1.Text + " Weight: " + label3.Text + " At Time: " +System.DateTime.Now.ToString();
-            mail.Body = emailbody;
-            client.Send(mail);
-            */
+                pd.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+                pd.DefaultPageSettings.Landscape = true;
+                pd.DefaultPageSettings.Margins = new Margins(1, 1, 1, 1);
 
-            textBox1.Text = "";
-            textBox1.Focus();
+                pd.Print();
+
+                /*
+                MailMessage mail = new MailMessage();
+                SmtpClient client = new SmtpClient();
+                client.Port = 25;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = "viking-bm.mail.protection.outlook.com";
+                mail.To.Add(new MailAddress("admin@viking.bm"));
+                mail.From = new MailAddress("lablelogger@viking.bm");
+                mail.Subject = "New Lablel";
+                string emailbody = "Label Printed For: " + textBox1.Text + " Weight: " + label3.Text + " At Time: " +System.DateTime.Now.ToString();
+                mail.Body = emailbody;
+                client.Send(mail);
+                */
+
+                textBox1.Text = "";
+                textBox1.Focus();
+            }
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
