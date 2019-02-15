@@ -19,23 +19,11 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            String BLANK = "    ";
-            updatebarcode(BLANK, "0000.00");
+            updatebarcode("", "99.99");
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            updatebarcode(textBox1.Text, label3.Text);
-            printimage();
-            textBox1.Text = "";
-            textBox1.Focus();
-
-        }
-
+               
         private void updatebarcode(string BarcodeText, string weight)
         {
-
-
             try
             {
                 var barcodeWriter = new BarcodeWriter
@@ -44,15 +32,14 @@ namespace WindowsFormsApp1
                     Options = new EncodingOptions
                     {
                         Height = 200,
-                        Width = 400,
+                        Width = 500,
                         Margin = 1,
                     }
                 };
                 //Weight in pounds 3202 with 2 decmial places
                 //string content = "VIKBDA" +BarcodeText + "3102" + weight;
                 string date = System.DateTime.Today.ToString("yyMMdd");
-
-
+                
                 Decimal weightformated = Math.Round(Convert.ToDecimal(weight),2);
                 String weightformated2 = weightformated.ToString("0000.00");
                 String weightformated3 = weightformated2.Replace(".","");
@@ -60,9 +47,9 @@ namespace WindowsFormsApp1
                 //string test2 = string.Format("%05d", test);
                 //20 = product varient , 11 = producation date, 3102, weigt
 
+                string textepadde = BarcodeText.PadLeft(textBox1.MaxLength);
 
-
-                string content = "20"+ BarcodeText + "11" + date +"3202" + weightformated3;
+                string content = "11" + date +"3202" + weightformated3 + "90" + textepadde;
 
                 //string content = weightformated.ToString();
                 //string content = ($"{(char)0x00F1}91AK905{(char)0x00F1}3102");
@@ -70,7 +57,6 @@ namespace WindowsFormsApp1
                 var barcodeImage = barcodeWriter.Write(content);
 
                 pictureBox1.Image = barcodeImage;
-
 
                 Graphics gr = Graphics.FromImage(barcodeImage);
 
@@ -81,7 +67,7 @@ namespace WindowsFormsApp1
 
                 //Size sizeOfText = TextRenderer.MeasureText(textToDraw, myFont);
 
-                Rectangle rect = new Rectangle(0,0,400,20);
+                Rectangle rect = new Rectangle(0,0,Width,20);
 
                 gr.FillRectangle(Brushes.White, rect);
 
@@ -96,12 +82,6 @@ namespace WindowsFormsApp1
             {
 
             }
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            updatebarcode(textBox1.Text, label3.Text);
         }
 
         private void printimage()
@@ -111,16 +91,12 @@ namespace WindowsFormsApp1
             //pd.PrinterSettings.PrinterName = "CutePDF Writer";
             string printer = @"\\viking-print16\Front";
             pd.PrinterSettings.PrinterName = printer;
-
-
- 
-
+                               
             pd.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
             pd.DefaultPageSettings.Landscape = true;
             pd.DefaultPageSettings.Margins = new Margins (1, 1, 1, 1);
             
             pd.Print();
-
 
             /*
             MailMessage mail = new MailMessage();
@@ -136,6 +112,9 @@ namespace WindowsFormsApp1
             mail.Body = emailbody;
             client.Send(mail);
             */
+
+            textBox1.Text = "";
+            textBox1.Focus();
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -146,18 +125,21 @@ namespace WindowsFormsApp1
         private void CheckEnterKeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
-
             {
                 updatebarcode(textBox1.Text, label3.Text);
                 printimage();
-                textBox1.Text = "";
-                textBox1.Focus();
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            updatebarcode(textBox1.Text, label3.Text);
+            printimage();           
+        }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            updatebarcode(textBox1.Text, label3.Text);
         }
     }
 }
