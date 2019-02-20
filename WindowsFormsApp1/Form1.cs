@@ -98,6 +98,11 @@ namespace WindowsFormsApp1
                 pd.DefaultPageSettings.Landscape = true;
                 pd.DefaultPageSettings.Margins = new Margins(1, 1, 1, 1);
 
+                
+                while (numericUpDown1.Value > 1) {
+                    pd.Print();
+                    numericUpDown1.Value = numericUpDown1.Value - 1;
+                }
                 pd.Print();
 
                 /*
@@ -129,20 +134,35 @@ namespace WindowsFormsApp1
         {
             if (e.KeyChar == (char)Keys.Return)
             {
-                updatebarcode(textBox1.Text, label3.Text);
-                printimage();
+                updateandPrint();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            updatebarcode(textBox1.Text, label3.Text);
-            printimage();           
+            updateandPrint();          
+        }
+
+        private void updateandPrint()
+        {
+            if (textBox2.TextLength!=0) {
+                updatebarcode(textBox1.Text, textBox2.Text);
+                textBox2.Clear();
+            }
+            else{
+                updatebarcode(textBox1.Text, label3.Text);
+            }
+            printimage();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             updatebarcode(textBox1.Text, label3.Text);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            updatebarcode(textBox1.Text, textBox2.Text);
         }
     }
 }
