@@ -50,12 +50,11 @@ namespace WindowsFormsApp1
                 string textepadde = BarcodeText.PadLeft(textBox1.MaxLength);
 
                 string content = "11" + date +"3202" + weightformated3 + "90" + textepadde;
-
+               
                 //string content = weightformated.ToString();
                 //string content = ($"{(char)0x00F1}91AK905{(char)0x00F1}3102");
 
                 var barcodeImage = barcodeWriter.Write(content);
-
                 pictureBox1.Image = barcodeImage;
 
                 Graphics gr = Graphics.FromImage(barcodeImage);
@@ -67,14 +66,41 @@ namespace WindowsFormsApp1
 
                 //Size sizeOfText = TextRenderer.MeasureText(textToDraw, myFont);
 
-                Rectangle rect = new Rectangle(0,0,Width,20);
+                Rectangle rect = new Rectangle(0,0,Width,22);
 
                 gr.FillRectangle(Brushes.White, rect);
 
                 gr.DrawString(textToDraw, myFont,drawBrush,0,0);
 
 
+                int boxstart = 150;
+
+                string contentoverlay = "    (11)" + date + "(3202)" + weightformated3 + "(90)" + textepadde +"\n" + "    www.viking.bm Tel: +1.441.238.2211";
+                Rectangle rect2 = new Rectangle(0, boxstart, Width, Height-boxstart);
+
+                gr.FillRectangle(Brushes.White, rect2);
+
+                gr.DrawString(contentoverlay, myFont, drawBrush, 0, boxstart+1);
+
+
+
+                //string contentoverlay2 = "    www.viking.bm Tel:+1.441.238.2211 \n hi";
+                //Rectangle rect3 = new Rectangle(0, 175, Width, 30);
+
+                //gr.FillRectangle(Brushes.White, rect3);
+
+                //gr.DrawString(contentoverlay2, myFont, drawBrush, 0, boxstart+25);
+
+
+
+
+
                 pictureBox1.Invalidate();
+
+
+
+
+
 
                 //label1.Text = "Viking Code: " + content + "   Weight: " + weight;
             }
