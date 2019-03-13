@@ -20,7 +20,8 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            updatebarcode("", "99.99");
+            label3.Text = Getweight().ToString();
+            updatebarcode("", label3.Text);
         }
                
         private void updatebarcode(string BarcodeText, string weight)
