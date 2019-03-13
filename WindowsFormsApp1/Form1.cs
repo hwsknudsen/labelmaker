@@ -11,6 +11,7 @@ using ZXing;
 using ZXing.Common;
 using System.Drawing.Printing;
 using System.Net.Mail;
+using System.IO.Ports;
 
 namespace WindowsFormsApp1
 {
@@ -62,7 +63,25 @@ namespace WindowsFormsApp1
                 Font myFont = new Font("Arial", 16);
                 SolidBrush drawBrush = new SolidBrush(Color.Black);
 
-                String textToDraw = "    Viking Code: " + BarcodeText + "   Weight: " + weight;
+                Boolean manual = true;
+                if (textBox2.Text.Length != 0)
+                {
+                    manual = false;
+                }
+
+                string manual2 = "";
+                if (manual == true)
+                {
+                    manual2 = "Y";
+                }
+                else
+                {
+                    manual2 = "N";
+                }
+
+
+                
+                String textToDraw = "  Viking Code: " + BarcodeText + " Weight: " + weight + " SCALE:"+ manual2;
 
                 //Size sizeOfText = TextRenderer.MeasureText(textToDraw, myFont);
 
@@ -81,9 +100,7 @@ namespace WindowsFormsApp1
                 gr.FillRectangle(Brushes.White, rect2);
 
                 gr.DrawString(contentoverlay, myFont, drawBrush, 0, boxstart+1);
-
-
-
+                               
                 //string contentoverlay2 = "    www.viking.bm Tel:+1.441.238.2211 \n hi";
                 //Rectangle rect3 = new Rectangle(0, 175, Width, 30);
 
@@ -91,16 +108,9 @@ namespace WindowsFormsApp1
 
                 //gr.DrawString(contentoverlay2, myFont, drawBrush, 0, boxstart+25);
 
-
-
-
-
+                                          
                 pictureBox1.Invalidate();
-
-
-
-
-
+                                                          
 
                 //label1.Text = "Viking Code: " + content + "   Weight: " + weight;
             }
@@ -176,6 +186,7 @@ namespace WindowsFormsApp1
                 textBox2.Clear();
             }
             else{
+                label3.Text = Getweight().ToString();
                 updatebarcode(textBox1.Text, label3.Text);
             }
             printimage();
@@ -183,12 +194,54 @@ namespace WindowsFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            label3.Text = Getweight().ToString();
             updatebarcode(textBox1.Text, label3.Text);
+        }
+
+        private object Getweight()
+        {
+
+            double weight = 00.00;
+
+            SerialPort port = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+            port.Open();
+
+            string raw = port.ReadLine();
+
+            double newweight = 00.00;
+            try
+            {
+                string substring = raw.Substring(4, 5);
+                newweight = Convert.ToDouble(substring);
+            }
+            catch
+            {
+
+            }
+            
+            //Console.WriteLine(weight);
+
+            //weight = Convert.ToDouble(raw.Substring(0, 8));
+               
+            port.Close();
+
+            if (newweight > 0 & newweight < 100){
+                weight = newweight;
+            }
+
+            return weight;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            updatebarcode(textBox1.Text, textBox2.Text);
+            if (textBox2.TextLength != 0)
+            {
+                updatebarcode(textBox1.Text, textBox2.Text);
+            }
+            else
+            {
+                updatebarcode(textBox1.Text, label3.Text);
+            }
         }
     }
 }
