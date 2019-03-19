@@ -51,8 +51,13 @@ namespace WindowsFormsApp1
 
                 string textepadde = BarcodeText.PadLeft(textBox1.MaxLength);
 
+
                 string content = "11" + date +"3202" + weightformated3 + "90" + textepadde;
                
+                if (weightformated == 0)
+                {
+                    content = "11" + date + "90" + textepadde;
+                }
                 //string content = weightformated.ToString();
                 //string content = ($"{(char)0x00F1}91AK905{(char)0x00F1}3102");
 
@@ -83,6 +88,12 @@ namespace WindowsFormsApp1
 
                 
                 String textToDraw = "  Viking Code: " + BarcodeText + " Weight: " + weight + " SCALE:"+ manual2;
+                if (weightformated == 0)
+                {
+                    textToDraw = "  Viking Code: " + BarcodeText;
+                }
+
+
 
                 //Size sizeOfText = TextRenderer.MeasureText(textToDraw, myFont);
 
@@ -96,6 +107,11 @@ namespace WindowsFormsApp1
                 int boxstart = 150;
 
                 string contentoverlay = "    (11)" + date + "(3202)" + weightformated3 + "(90)" + textepadde +"\n" + "    www.viking.bm Tel: +1.441.238.2211";
+                if (weightformated == 0)
+                {
+                    contentoverlay = "    (11)" + date + "(90)" + textepadde + "\n" + "    www.viking.bm Tel: +1.441.238.2211";
+                }
+
                 Rectangle rect2 = new Rectangle(0, boxstart, Width, Height-boxstart);
 
                 gr.FillRectangle(Brushes.White, rect2);
@@ -204,32 +220,36 @@ namespace WindowsFormsApp1
 
             double weight = 00.00;
 
-            SerialPort port = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
-            port.Open();
-
-            string raw = port.ReadLine();
-
-            double newweight = 00.00;
-            try
+            try//try adn get weight from scale return 0 if no weight
             {
-                string substring = raw.Substring(4, 5);
-                newweight = Convert.ToDouble(substring);
+                SerialPort port = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+                port.Open();
+                string raw = port.ReadLine();
+
+                double newweight = 00.00;
+                try
+                {
+                    string substring = raw.Substring(4, 5);
+                    newweight = Convert.ToDouble(substring);
+                }
+                catch
+                {
+
+                }
+
+                //Console.WriteLine(weight);
+
+                //weight = Convert.ToDouble(raw.Substring(0, 8));
+
+                port.Close();
+
+                if (newweight > 0 & newweight < 100)
+                {
+                    weight = newweight;
+                }
             }
-            catch
-            {
-
+            catch {
             }
-            
-            //Console.WriteLine(weight);
-
-            //weight = Convert.ToDouble(raw.Substring(0, 8));
-               
-            port.Close();
-
-            if (newweight > 0 & newweight < 100){
-                weight = newweight;
-            }
-
             return weight;
         }
 
