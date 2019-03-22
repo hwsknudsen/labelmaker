@@ -144,7 +144,9 @@ namespace WindowsFormsApp1
                 PrintDocument pd = new PrintDocument();
 
                 //pd.PrinterSettings.PrinterName = "CutePDF Writer";
-                string printer = @"\\viking-print16\Front";
+                //string printer = @"\\viking-print16\Front";
+                string printer = "Rollo Printer";
+
                 pd.PrinterSettings.PrinterName = printer;
 
                 pd.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
@@ -156,6 +158,7 @@ namespace WindowsFormsApp1
                     pd.Print();
                     numericUpDown1.Value = numericUpDown1.Value - 1;
                 }
+               
                 pd.Print();
 
                 /*
@@ -173,8 +176,10 @@ namespace WindowsFormsApp1
                 client.Send(mail);
                 */
 
+                textBox3.Text = textBox1.Text;
                 textBox1.Text = "";
                 textBox1.Focus();
+
             }
         }
 
@@ -198,16 +203,19 @@ namespace WindowsFormsApp1
 
         private void updateandPrint()
         {
-            if (textBox2.TextLength!=0) {
+            if (textBox2.TextLength!=0) { //Make the barcode Custom Weight
                 updatebarcode(textBox1.Text, textBox2.Text);
                 textBox2.Clear();
             }
-            else{
+            else{ //make the barcode scale weight
                 label3.Text = Getweight().ToString();
                 updatebarcode(textBox1.Text, label3.Text);
             }
-            printimage();
+            printimage(); //Print the bar code
         }
+
+
+      
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -263,6 +271,13 @@ namespace WindowsFormsApp1
             {
                 updatebarcode(textBox1.Text, label3.Text);
             }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            textBox1.Text = textBox3.Text;
+            textBox1.Focus();
+            updateandPrint();
         }
     }
 }
