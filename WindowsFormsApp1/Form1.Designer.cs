@@ -28,49 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxMain = new System.Windows.Forms.TextBox();
+            this.buttonPrint = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.labelScaleWeight = new System.Windows.Forms.Label();
+            this.textBoxWeight = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownPrintQuantity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.buttonRePrint = new System.Windows.Forms.Button();
+            this.textBoxOld = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrintQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxMain
             // 
-            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(206, 15);
-            this.textBox1.MaxLength = 8;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(302, 53);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterKeyPress);
+            this.textBoxMain.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBoxMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxMain.Location = new System.Drawing.Point(206, 15);
+            this.textBoxMain.MaxLength = 8;
+            this.textBoxMain.Name = "textBoxMain";
+            this.textBoxMain.Size = new System.Drawing.Size(302, 53);
+            this.textBoxMain.TabIndex = 0;
+            this.textBoxMain.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxMain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnterKeyPress);
             // 
-            // button1
+            // buttonPrint
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(547, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 56);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Print";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPrint.Location = new System.Drawing.Point(547, 15);
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(146, 56);
+            this.buttonPrint.TabIndex = 1;
+            this.buttonPrint.Text = "Print";
+            this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -99,26 +99,26 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Last Reading For Print";
             // 
-            // label3
+            // labelScaleWeight
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(340, 188);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 31);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "99.90";
+            this.labelScaleWeight.AutoSize = true;
+            this.labelScaleWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelScaleWeight.Location = new System.Drawing.Point(340, 188);
+            this.labelScaleWeight.Name = "labelScaleWeight";
+            this.labelScaleWeight.Size = new System.Drawing.Size(87, 31);
+            this.labelScaleWeight.TabIndex = 6;
+            this.labelScaleWeight.Text = "99.90";
             // 
-            // textBox2
+            // textBoxWeight
             // 
-            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(824, 174);
-            this.textBox2.MaxLength = 5;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(112, 53);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBoxWeight.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBoxWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxWeight.Location = new System.Drawing.Point(824, 174);
+            this.textBoxWeight.MaxLength = 5;
+            this.textBoxWeight.Name = "textBoxWeight";
+            this.textBoxWeight.Size = new System.Drawing.Size(112, 53);
+            this.textBoxWeight.TabIndex = 4;
+            this.textBoxWeight.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label1
             // 
@@ -140,24 +140,24 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Print Quantity";
             // 
-            // numericUpDown1
+            // numericUpDownPrintQuantity
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(206, 133);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numericUpDownPrintQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownPrintQuantity.Location = new System.Drawing.Point(206, 133);
+            this.numericUpDownPrintQuantity.Maximum = new decimal(new int[] {
             99,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.numericUpDownPrintQuantity.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(61, 38);
-            this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.numericUpDownPrintQuantity.Name = "numericUpDownPrintQuantity";
+            this.numericUpDownPrintQuantity.Size = new System.Drawing.Size(61, 38);
+            this.numericUpDownPrintQuantity.TabIndex = 3;
+            this.numericUpDownPrintQuantity.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -188,52 +188,52 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Last Code";
             // 
-            // button2
+            // buttonRePrint
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(547, 74);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(209, 56);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "RePrint";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.buttonRePrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRePrint.Location = new System.Drawing.Point(547, 74);
+            this.buttonRePrint.Name = "buttonRePrint";
+            this.buttonRePrint.Size = new System.Drawing.Size(209, 56);
+            this.buttonRePrint.TabIndex = 2;
+            this.buttonRePrint.Text = "RePrint";
+            this.buttonRePrint.UseVisualStyleBackColor = true;
+            this.buttonRePrint.Click += new System.EventHandler(this.button2_Click_1);
             // 
-            // textBox3
+            // textBoxOld
             // 
-            this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(206, 74);
-            this.textBox3.MaxLength = 8;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(302, 53);
-            this.textBox3.TabIndex = 16;
-            this.textBox3.TabStop = false;
+            this.textBoxOld.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBoxOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxOld.Location = new System.Drawing.Point(206, 74);
+            this.textBoxOld.MaxLength = 8;
+            this.textBoxOld.Name = "textBoxOld";
+            this.textBoxOld.ReadOnly = true;
+            this.textBoxOld.Size = new System.Drawing.Size(302, 53);
+            this.textBoxOld.TabIndex = 16;
+            this.textBoxOld.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1285, 633);
+            this.ClientSize = new System.Drawing.Size(1023, 633);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.buttonRePrint);
+            this.Controls.Add(this.textBoxOld);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDownPrintQuantity);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxWeight);
+            this.Controls.Add(this.labelScaleWeight);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.buttonPrint);
+            this.Controls.Add(this.textBoxMain);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrintQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -242,21 +242,21 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBoxMain;
+        private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label labelScaleWeight;
+        private System.Windows.Forms.TextBox textBoxWeight;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownPrintQuantity;
         private System.Windows.Forms.Label label4;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button buttonRePrint;
+        private System.Windows.Forms.TextBox textBoxOld;
     }
 }
 

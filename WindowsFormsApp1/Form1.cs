@@ -20,8 +20,8 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            label3.Text = Getweight().ToString();
-            updatebarcode("", label3.Text);
+            labelScaleWeight.Text = Getweight().ToString();
+            updatebarcode("", labelScaleWeight.Text);
         }
                
         private void updatebarcode(string BarcodeText, string weight)
@@ -49,28 +49,12 @@ namespace WindowsFormsApp1
                 //string test2 = string.Format("%05d", test);
                 //20 = product varient , 11 = producation date, 3102, weigt
 
-                string textepadde = BarcodeText.PadLeft(textBox1.MaxLength);
+                string textepadde = BarcodeText.PadLeft(textBoxMain.MaxLength);
 
 
-                string content = "11" + date +"3202" + weightformated3 + "90" + textepadde;
-               
-                if (weightformated == 0)
-                {
-                    content = "11" + date + "90" + textepadde;
-                }
-                //string content = weightformated.ToString();
-                //string content = ($"{(char)0x00F1}91AK905{(char)0x00F1}3102");
-
-                var barcodeImage = barcodeWriter.Write(content);
-                pictureBox1.Image = barcodeImage;
-
-                Graphics gr = Graphics.FromImage(barcodeImage);
-
-                Font myFont = new Font("Arial", 16);
-                SolidBrush drawBrush = new SolidBrush(Color.Black);
 
                 Boolean manual = true;
-                if (textBox2.Text.Length != 0)
+                if (textBoxWeight.Text.Length != 0)
                 {
                     manual = false;
                 }
@@ -86,50 +70,45 @@ namespace WindowsFormsApp1
                 }
 
 
-                
-                String textToDraw = "  Viking Code: " + BarcodeText + " Weight: " + weight + " SCALE:"+ manual2;
+
+
+                string content = "11" + date +"3202" + weightformated3 + "90" + textepadde;
+                String textToDraw = "  Viking Code: " + BarcodeText + " Weight: " + weight + " SCALE:" + manual2;
+                string contentoverlay = "    (11)" + date + "(3202)" + weightformated3 + "(90)" + textepadde + "\n" + "    www.viking.bm Tel: +1.441.238.2211";
+
                 if (weightformated == 0)
                 {
+                    content = "11" + date + "90" + textepadde;
                     textToDraw = "  Viking Code: " + BarcodeText;
+                    contentoverlay = "    (11)" + date + "(90)" + textepadde + "\n" + "    www.viking.bm Tel: +1.441.238.2211";
+
                 }
 
+                var barcodeImage = barcodeWriter.Write(content);
+                pictureBox1.Image = barcodeImage;
 
+                Graphics gr = Graphics.FromImage(barcodeImage);
 
-                //Size sizeOfText = TextRenderer.MeasureText(textToDraw, myFont);
-
+                Font myFont = new Font("Arial", 16);
+                SolidBrush drawBrush = new SolidBrush(Color.Black);
+                                
                 Rectangle rect = new Rectangle(0,0,Width,22);
 
                 gr.FillRectangle(Brushes.White, rect);
 
                 gr.DrawString(textToDraw, myFont,drawBrush,0,0);
 
-
                 int boxstart = 150;
-
-                string contentoverlay = "    (11)" + date + "(3202)" + weightformated3 + "(90)" + textepadde +"\n" + "    www.viking.bm Tel: +1.441.238.2211";
-                if (weightformated == 0)
-                {
-                    contentoverlay = "    (11)" + date + "(90)" + textepadde + "\n" + "    www.viking.bm Tel: +1.441.238.2211";
-                }
 
                 Rectangle rect2 = new Rectangle(0, boxstart, Width, Height-boxstart);
 
                 gr.FillRectangle(Brushes.White, rect2);
 
                 gr.DrawString(contentoverlay, myFont, drawBrush, 0, boxstart+1);
-                               
-                //string contentoverlay2 = "    www.viking.bm Tel:+1.441.238.2211 \n hi";
-                //Rectangle rect3 = new Rectangle(0, 175, Width, 30);
-
-                //gr.FillRectangle(Brushes.White, rect3);
-
-                //gr.DrawString(contentoverlay2, myFont, drawBrush, 0, boxstart+25);
-
-                                          
+                                                 
                 pictureBox1.Invalidate();
-                                                          
+                                                         
 
-                //label1.Text = "Viking Code: " + content + "   Weight: " + weight;
             }
             catch
             {
@@ -139,7 +118,7 @@ namespace WindowsFormsApp1
 
         private void printimage()
         {
-            if (textBox1.Text.Length >= 3)
+            if (textBoxMain.Text.Length >= 3)//sanity check for minmum code length
             {
                 PrintDocument pd = new PrintDocument();
 
@@ -154,9 +133,9 @@ namespace WindowsFormsApp1
                 pd.DefaultPageSettings.Margins = new Margins(1, 1, 1, 1);
 
                 
-                while (numericUpDown1.Value > 1) {
+                while (numericUpDownPrintQuantity.Value > 1) {
                     pd.Print();
-                    numericUpDown1.Value = numericUpDown1.Value - 1;
+                    numericUpDownPrintQuantity.Value = numericUpDownPrintQuantity.Value - 1;
                 }
                
                 pd.Print();
@@ -176,9 +155,12 @@ namespace WindowsFormsApp1
                 client.Send(mail);
                 */
 
-                textBox3.Text = textBox1.Text;
-                textBox1.Text = "";
-                textBox1.Focus();
+                //set current code entery to old code in case reentry is desired
+
+                textBoxOld.Text = textBoxMain.Text;
+                textBoxMain.Text = "";
+                textBoxMain.Focus();
+                textBoxWeight.Clear();
 
             }
         }
@@ -203,24 +185,25 @@ namespace WindowsFormsApp1
 
         private void updateandPrint()
         {
-            if (textBox2.TextLength!=0) { //Make the barcode Custom Weight
-                updatebarcode(textBox1.Text, textBox2.Text);
-                textBox2.Clear();
+            if (textBoxWeight.TextLength != 0) { //Make the barcode Custom Weight
+                updatebarcode(textBoxMain.Text, textBoxWeight.Text);
+                printimage(); //Print the bar code
             }
-            else{ //make the barcode scale weight
-                label3.Text = Getweight().ToString();
-                updatebarcode(textBox1.Text, label3.Text);
+            else
+            { //make the barcode scale weight
+                labelScaleWeight.Text = Getweight().ToString();
+                updatebarcode(textBoxMain.Text, labelScaleWeight.Text);
+                printimage(); //Print the bar code
             }
-            printimage(); //Print the bar code
         }
 
 
       
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e) //update
         {
-            label3.Text = Getweight().ToString();
-            updatebarcode(textBox1.Text, label3.Text);
+            labelScaleWeight.Text = Getweight().ToString();
+            updatebarcode(textBoxMain.Text, labelScaleWeight.Text);
         }
 
         private object Getweight()
@@ -228,7 +211,7 @@ namespace WindowsFormsApp1
 
             double weight = 00.00;
 
-            try//try adn get weight from scale return 0 if no weight
+            try//try and get weight from scale return 0 if no weight
             {
                 SerialPort port = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
                 port.Open();
@@ -251,7 +234,7 @@ namespace WindowsFormsApp1
 
                 port.Close();
 
-                if (newweight > 0 & newweight < 100)
+                if (newweight > 0 & newweight < 100) //sainity check for weight from scale
                 {
                     weight = newweight;
                 }
@@ -261,22 +244,22 @@ namespace WindowsFormsApp1
             return weight;
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)  //update barcode
         {
-            if (textBox2.TextLength != 0)
+            if (textBoxWeight.TextLength != 0)
             {
-                updatebarcode(textBox1.Text, textBox2.Text);
+                updatebarcode(textBoxMain.Text, textBoxWeight.Text);
             }
             else
             {
-                updatebarcode(textBox1.Text, label3.Text);
+                updatebarcode(textBoxMain.Text, labelScaleWeight.Text);
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e) //print old
         {
-            textBox1.Text = textBox3.Text;
-            textBox1.Focus();
+            textBoxMain.Text = textBoxOld.Text;
+            textBoxMain.Focus();
             updateandPrint();
         }
     }
